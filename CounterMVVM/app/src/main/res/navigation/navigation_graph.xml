@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/mainFragment">
+
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.myapp.ui.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_counterDisplayFragment"
+            app:destination="@id/counterDisplayFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/counterDisplayFragment"
+        android:name="com.example.myapp.ui.CounterDisplayFragment"
+        android:label="fragment_counter_display"
+        tools:layout="@layout/fragment_counter_display" />
+
+    <argument
+        android:name="counter"
+        android:defaultValue="0"
+        app:argType="integer" />
+
+</navigation>
