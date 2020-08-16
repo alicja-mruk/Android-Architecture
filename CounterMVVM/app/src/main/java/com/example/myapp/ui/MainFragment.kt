@@ -8,21 +8,21 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.example.myapp.R
+import com.example.myapp.databinding.FragmentMainBinding
 import com.example.myapp.viewmodel.CounterViewModel
-import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainFragment : Fragment() {
-    lateinit var viewModel: CounterViewModel
+    private lateinit var binding: FragmentMainBinding
+    private lateinit var viewModel: CounterViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        binding = FragmentMainBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -33,23 +33,23 @@ class MainFragment : Fragment() {
         }
 
         viewModel.counter.observe(viewLifecycleOwner, Observer {
-            counter_text.text = it.toString()
+            binding.counterText.text = it.toString()
         })
 
         setOnClickListeners()
     }
 
     private fun setOnClickListeners(){
-        increment_btn.setOnClickListener {
+        binding.incrementBtn.setOnClickListener {
             viewModel.incrementCounter()
         }
 
-        decrement_btn.setOnClickListener {
+        binding.decrementBtn.setOnClickListener {
             viewModel.decrementCounter()
         }
 
-        go_to_second_fragment_btn.setOnClickListener {
-            val bundle = bundleOf("counter" to counter_text.text.toString())
+        binding.goToSecondFragmentBtn.setOnClickListener {
+            val bundle = bundleOf("counter" to binding.counterText.text.toString())
             findNavController().navigate(R.id.action_mainFragment_to_counterDisplayFragment, bundle)
         }
     }
