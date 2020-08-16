@@ -6,25 +6,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.myapp.R
-import kotlinx.android.synthetic.main.fragment_counter_display.*
+import com.example.myapp.databinding.FragmentCounterDisplayBinding
 
 class CounterDisplayFragment : Fragment() {
+    private lateinit var binding: FragmentCounterDisplayBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        return inflater.inflate(R.layout.fragment_counter_display, container, false)
+        binding = FragmentCounterDisplayBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        counter_text_details.text = arguments?.getString("counter")
+       binding.counterTextDetails.text = arguments?.getString("counter")
 
-        go_back_btn.setOnClickListener {
+        binding.goBackBtn.setOnClickListener {
             findNavController().popBackStack()
         }
     }
